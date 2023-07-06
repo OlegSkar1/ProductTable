@@ -10,7 +10,7 @@ export const productList: ProductListType = [
     stock: 'Ekb',
   },
   {
-    id: '1',
+    id: '2',
     date: '06.07.2023',
     name: 'product1',
     price: 100,
@@ -18,7 +18,7 @@ export const productList: ProductListType = [
     stock: 'Ekb',
   },
   {
-    id: '1',
+    id: '3',
     date: '06.07.2023',
     name: 'product1',
     price: 100,

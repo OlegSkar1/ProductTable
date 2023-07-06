@@ -8,3 +8,8 @@ export interface IProduct {
 }
 
 export type ProductListType = IProduct[];
+
+export interface ProductSchema {
+  data: ProductListType;
+  isLoading?: boolean;
+}

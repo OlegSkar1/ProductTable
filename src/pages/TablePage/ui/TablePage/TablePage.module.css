@@ -1,0 +1,15 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px
+}
+
+.icon {
+    align-self: flex-end;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.icon:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}

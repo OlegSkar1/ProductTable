@@ -11,13 +11,15 @@ export const ProductTable: FC<Props> = memo(({ products }) => {
   return (
     <table className={cls.table}>
       <thead>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Quantity</th>
-        <th>Price</th>
-        <th>Date</th>
-        <th>Stock</th>
-        <th>Edit</th>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Date</th>
+          <th>Stock</th>
+          <th>Edit</th>
+        </tr>
       </thead>
       <tbody>
         <ProductList products={products} />
