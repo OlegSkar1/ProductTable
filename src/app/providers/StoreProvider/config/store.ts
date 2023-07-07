@@ -1,8 +1,10 @@
-import { productReducer } from '@/entities/Product';
+import { productListReducer } from '@/entities/Product';
+import { productReducer } from '@/features/CreateProduct';
 import { configureStore } from '@reduxjs/toolkit';
 
 export const store = configureStore({
   reducer: {
+    productList: productListReducer,
     product: productReducer,
   },
 });

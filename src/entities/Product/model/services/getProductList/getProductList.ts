@@ -7,7 +7,7 @@ export const getProductList = createAsyncThunk<
   ProductListType,
   void,
   { state: StateSchema }
->('product/getProductList', (_, { getState }) => {
+>('productList/getProductList', (_, { getState }) => {
   const productListStore = localStorage.getItem('PRODUCTS_KEY');
 
   if (!productListStore) {

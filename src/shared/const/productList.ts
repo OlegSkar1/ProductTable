@@ -7,7 +7,7 @@ export const productList: ProductListType = [
     name: 'product1',
     price: 100,
     quantity: 10,
-    stock: 'Ekb',
+    stock: 'moskow',
   },
   {
     id: '2',
@@ -15,7 +15,7 @@ export const productList: ProductListType = [
     name: 'product1',
     price: 100,
     quantity: 10,
-    stock: 'Ekb',
+    stock: 'ekb',
   },
   {
     id: '3',
@@ -23,6 +23,6 @@ export const productList: ProductListType = [
     name: 'product1',
     price: 100,
     quantity: 10,
-    stock: 'Ekb',
+    stock: 'tomsk',
   },
 ];

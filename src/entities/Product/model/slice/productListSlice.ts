@@ -1,15 +1,15 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { ProductListType, ProductSchema } from '../..';
+import { ProductListSchema, ProductListType } from '../..';
 import { productList } from '@/shared/const/productList';
 import { PRODUCTS_KEY } from '@/shared/const/localStorage';
 import { getProductList } from '../services/getProductList/getProductList';
 
-const initialState: ProductSchema = {
+const initialState: ProductListSchema = {
   data: productList,
 };
 
-const productSlice = createSlice({
-  name: 'product',
+const productListSlice = createSlice({
+  name: 'productList',
   initialState,
   reducers: {
     setProductList: (state, { payload }: PayloadAction<ProductListType>) => {
@@ -24,5 +24,5 @@ const productSlice = createSlice({
   },
 });
 
-export const { reducer: productReducer, actions: productActions } =
-  productSlice;
+export const { reducer: productListReducer, actions: productlistActions } =
+  productListSlice;
