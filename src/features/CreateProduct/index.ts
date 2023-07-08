@@ -1,3 +1,4 @@
+export { addProduct } from './services/addProduct/addProduct';
 export { getProductData } from './model/selectors/productSelectors/productSelectors';
 export { productReducer } from './model/slice/productSlice';
 export { CreateProductModal } from './ui/CreateProductModal/CreateProductModal';

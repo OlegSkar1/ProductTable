@@ -4,6 +4,7 @@ import { StockList } from '@/entities/Stock';
 import { MouseEvent } from 'react';
 import { useProductForm } from '../../lib/hooks/useProductForm';
 import { classNames } from '@/shared/lib/classNames/classNames';
+import { Input } from '@/shared/ui/Input';
 
 interface Props {
   onSuccess: () => void;
@@ -11,16 +12,10 @@ interface Props {
 }
 
 const CreateProductForm = ({ onSuccess, className }: Props) => {
-  const { currDate } = dateHelper();
-  const {
-    product,
-    onChangeDate,
-    onChangeName,
-    onChangePrice,
-    onChangeQnt,
-    onChangeStock,
-    onSave,
-  } = useProductForm();
+  const { product, onChangeDate, onChangeName, onChangePrice, onChangeQnt, onChangeStock, onSave } =
+    useProductForm();
+
+  const { currDate } = dateHelper(product?.date);
 
   const submitHandler = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -28,53 +23,43 @@ const CreateProductForm = ({ onSuccess, className }: Props) => {
     onSuccess();
   };
 
-  const nameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChangeName(e.target.value);
-  };
-  const qntHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChangeQnt(+e.target.value);
-  };
-  const priceHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChangePrice(+e.target.value);
-  };
-  const dateHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChangeDate(e.target.value);
-    console.log(e.target.value);
-  };
-
   return (
     <form className={classNames(cls.form, [className], {})}>
-      <input
+      <Input
         placeholder="Product Name"
         name="name"
-        value={product?.name}
-        onChange={nameHandler}
+        value={product?.name ?? ''}
+        onChange={onChangeName}
+        className={cls.input}
       />
-      <input
+      <Input
         placeholder="Quantity"
         type="number"
         name="qnt"
         min="0"
-        value={product?.quantity}
-        onChange={qntHandler}
+        value={product?.quantity?.toString() ?? ''}
+        onChange={onChangeQnt}
+        className={cls.input}
       />
-      <input
+      <Input
         placeholder="Price"
         type="number"
         name="price"
         min="0"
-        value={product?.price}
-        onChange={priceHandler}
+        value={product?.price?.toString() ?? ''}
+        onChange={onChangePrice}
+        className={cls.input}
       />
-      <input
+      <Input
         placeholder="Date"
         type="date"
         name="date"
         max={currDate}
-        value={product?.date}
-        onChange={dateHandler}
+        value={product?.date ?? ''}
+        onChange={onChangeDate}
+        className={cls.input}
       />
-      <StockList value={product?.stock} onChange={onChangeStock} />
+      <StockList value={product?.stock} onChange={onChangeStock} className={cls.input} />
       <button onClick={submitHandler}>Submit</button>
     </form>
   );

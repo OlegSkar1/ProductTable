@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { ProductSchema } from '../types/productSchema';
-import { IProduct, addProduct } from '@/entities/Product';
+import { IProduct } from '@/entities/Product';
+import { addProduct } from '../..';
 
 const initialState: ProductSchema = {
   data: undefined,
@@ -19,10 +20,9 @@ const productSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(addProduct.fulfilled, (state) => {
-      state.data = undefined;
+      state.data = {};
     });
   },
 });
 
-export const { reducer: productReducer, actions: productActions } =
-  productSlice;
+export const { reducer: productReducer, actions: productActions } = productSlice;

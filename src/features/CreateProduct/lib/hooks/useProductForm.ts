@@ -1,16 +1,14 @@
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
-import { useCallback, useId } from 'react';
+import { useCallback } from 'react';
 import { productActions } from '../../model/slice/productSlice';
-import { dateHelper } from '@/shared/lib/dateHelper/dateHelper';
 import { StockType } from '@/entities/Stock';
-import { addProduct } from '@/entities/Product';
 import { useSelector } from 'react-redux';
-import { getProductData } from '../..';
+import { addProduct, getProductData } from '../..';
 
 export const useProductForm = () => {
-  const id = useId();
   const dispatch = useAppDispatch();
   const product = useSelector(getProductData);
+  const id = new Date().getTime().toString().slice(3);
 
   const onChangeName = useCallback(
     (value?: string) => {
@@ -19,21 +17,20 @@ export const useProductForm = () => {
     [dispatch]
   );
   const onChangeQnt = useCallback(
-    (value?: number) => {
-      dispatch(productActions.createProduct({ quantity: value || 0 }));
+    (value?: string) => {
+      dispatch(productActions.createProduct({ quantity: Number(value) || 0 }));
     },
     [dispatch]
   );
   const onChangePrice = useCallback(
-    (value?: number) => {
-      dispatch(productActions.createProduct({ price: value || 0 }));
+    (value?: string) => {
+      dispatch(productActions.createProduct({ price: Number(value) || 0 }));
     },
     [dispatch]
   );
   const onChangeDate = useCallback(
     (value?: string) => {
-      const { currDate } = dateHelper();
-      dispatch(productActions.createProduct({ date: value || currDate }));
+      dispatch(productActions.createProduct({ date: value }));
     },
     [dispatch]
   );
