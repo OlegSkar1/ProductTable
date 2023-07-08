@@ -1,0 +1,13 @@
+.invalid {
+  border: 1px solid red;
+}
+
+.invalid:focus,
+.invalid:active {
+  outline: 1px solid red;
+}
+
+.errorDesc {
+  color: red;
+  font-weight: 500;
+}

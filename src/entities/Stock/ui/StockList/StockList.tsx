@@ -2,8 +2,6 @@ import { ListBox } from '@/shared/ui/Listbox';
 import { StockType } from '../..';
 import { useCallback } from 'react';
 import { ListBoxItem } from '@/shared/ui/Listbox/ui/Listbox/Listbox';
-import cls from './StockList.module.css';
-import { classNames } from '@/shared/lib/classNames/classNames';
 
 const items: ListBoxItem<StockType>[] = [
   {
@@ -25,9 +23,18 @@ interface Props {
   value?: StockType;
   readonly?: boolean;
   className?: string;
+  name?: string;
+  validateErrors?: string;
 }
 
-export const StockList = ({ onChange, value, readonly, className }: Props) => {
+export const StockList = ({
+  onChange,
+  value,
+  readonly,
+  name,
+  className,
+  validateErrors,
+}: Props) => {
   const changeHandler = useCallback(
     (value: string) => {
       onChange(value as StockType);
@@ -37,12 +44,14 @@ export const StockList = ({ onChange, value, readonly, className }: Props) => {
 
   return (
     <ListBox
+      name={name}
       items={items}
       onChange={changeHandler}
       value={value ?? 'Stocks'}
       readonly={readonly}
       defaultValue="Stocks"
-      className={classNames(cls.wrapper, [className], {})}
+      validateError={validateErrors}
+      className={className}
     />
   );
 };

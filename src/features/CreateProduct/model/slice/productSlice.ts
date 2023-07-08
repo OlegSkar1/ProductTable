@@ -19,9 +19,16 @@ const productSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(addProduct.fulfilled, (state) => {
-      state.data = {};
-    });
+    builder
+      .addCase(addProduct.pending, (state) => {
+        state.validateErrors = undefined;
+      })
+      .addCase(addProduct.fulfilled, (state) => {
+        state.data = {};
+      })
+      .addCase(addProduct.rejected, (state, { payload }) => {
+        state.validateErrors = payload;
+      });
   },
 });
 

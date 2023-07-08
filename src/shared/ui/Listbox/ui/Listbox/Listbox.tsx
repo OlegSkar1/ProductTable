@@ -17,12 +17,14 @@ interface ListBoxProps<T extends string> {
   onChange: (value: T) => void;
   items: ListBoxItem<T>[];
   readonly?: boolean;
+  name?: string;
+  validateError?: string;
 }
 
 const typedMemo: <T>(cb: T) => T = memo;
 
 export const ListBox = typedMemo(<T extends string>(props: ListBoxProps<T>) => {
-  const { className, value, onChange, items, defaultValue, readonly } = props;
+  const { className, value, onChange, items, defaultValue, readonly, name, validateError } = props;
 
   const optionsClasses = [cls.items];
 
@@ -38,14 +40,17 @@ export const ListBox = typedMemo(<T extends string>(props: ListBoxProps<T>) => {
       onChange={onChange}
       className={classNames(cls.wrapper, [className], {})}
       disabled={readonly}
+      name={name}
     >
       <HListbox.Button
         className={classNames('', [className], {
           [cls.disable]: readonly,
+          [cls.invalid]: validateError,
         })}
       >
         <span>{selectedValue?.content ?? defaultValue}</span>
       </HListbox.Button>
+      <HListbox.Label className={cls.errorDesc}>{validateError}</HListbox.Label>
       <HListbox.Options className={classNames(cls.menu, optionsClasses, {})}>
         {items.map((item) => (
           <HListbox.Option

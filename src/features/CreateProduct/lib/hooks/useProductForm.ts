@@ -3,12 +3,13 @@ import { useCallback } from 'react';
 import { productActions } from '../../model/slice/productSlice';
 import { StockType } from '@/entities/Stock';
 import { useSelector } from 'react-redux';
-import { addProduct, getProductData } from '../..';
+import { getProductData } from '../..';
+import { getValidateErrors } from '../../model/selectors/productSelectors/productSelectors';
 
 export const useProductForm = () => {
   const dispatch = useAppDispatch();
   const product = useSelector(getProductData);
-  const id = new Date().getTime().toString().slice(3);
+  const validateErrors = useSelector(getValidateErrors);
 
   const onChangeName = useCallback(
     (value?: string) => {
@@ -41,18 +42,13 @@ export const useProductForm = () => {
     [dispatch]
   );
 
-  const onSave = useCallback(async () => {
-    dispatch(productActions.createProduct({ id }));
-    await dispatch(addProduct());
-  }, [dispatch, id]);
-
   return {
     product,
+    validateErrors,
     onChangeName,
     onChangeQnt,
     onChangePrice,
     onChangeDate,
     onChangeStock,
-    onSave,
   };
 };

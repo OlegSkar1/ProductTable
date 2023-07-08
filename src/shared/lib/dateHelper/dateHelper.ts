@@ -1,5 +1,6 @@
 export const dateHelper = (date?: string) => {
   const time = new Date();
+
   const year = time.getFullYear().toString();
   let month = (time.getMonth() + 1).toString();
   let day = time.getDate().toString();
@@ -12,7 +13,10 @@ export const dateHelper = (date?: string) => {
   }
 
   const currDate = `${year}-${month}-${day}`;
+
   let normalizedDate = date;
+
+  let isFuture;
 
   if (date && date.includes('-')) {
     const dateArr = date?.split('-');
@@ -21,6 +25,8 @@ export const dateHelper = (date?: string) => {
     dateArr[2] = temp;
 
     normalizedDate = dateArr?.join('.');
+
+    isFuture = Date.parse(date) > Date.parse(currDate);
   }
 
   return {
@@ -29,5 +35,6 @@ export const dateHelper = (date?: string) => {
     day,
     currDate,
     normalizedDate,
+    isFuture,
   };
 };

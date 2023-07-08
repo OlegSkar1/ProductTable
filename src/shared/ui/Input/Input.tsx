@@ -1,4 +1,6 @@
 import { InputHTMLAttributes, memo, useEffect, useRef } from 'react';
+import cls from './Input.module.css';
+import { classNames } from '@/shared/lib/classNames/classNames';
 
 type HTMLInputProps = Omit<
   InputHTMLAttributes<HTMLInputElement>,
@@ -11,6 +13,7 @@ interface InputProps extends HTMLInputProps {
   onChange?: (value: string) => void;
   label?: string;
   readonly?: boolean;
+  validateError?: string;
 }
 
 export const Input: React.FC<InputProps> = memo((props) => {
@@ -22,6 +25,7 @@ export const Input: React.FC<InputProps> = memo((props) => {
     label,
     autoFocus,
     readonly,
+    validateError,
     ...otherProps
   } = props;
   const ref = useRef<HTMLInputElement>(null);
@@ -44,10 +48,11 @@ export const Input: React.FC<InputProps> = memo((props) => {
         type={type}
         value={value}
         onChange={onChangeHandler}
-        className={className}
+        className={classNames('', [className], { [cls.invalid]: validateError })}
         disabled={readonly}
         {...otherProps}
       />
+      <p className={cls.errorDesc}>{validateError}</p>
     </div>
   );
 });

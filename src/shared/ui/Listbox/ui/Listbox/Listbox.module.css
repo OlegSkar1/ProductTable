@@ -1,72 +1,82 @@
 .wrapper {
-    position: relative;
+  position: relative;
+}
+
+.invalid {
+  border: 1px solid red;
+}
+
+.wrapper .invalid:hover {
+  border: 1px solid red;
+}
+
+.errorDesc {
+  color: red;
+  font-weight: 500;
 }
 
 .items {
-    overflow: hidden;
-    border: 1px solid var(#646cff);
-    border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(#646cff);
+  border-radius: 18px;
 }
 
 .items .active {
-    background: #535bf2;
-    color: #213547
+  background: #535bf2;
+  color: #213547;
 }
 
 .trigger {
-    cursor: pointer;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
 
-    margin: 0;
-    padding: 0;
-
-    background: none;
-    border: none;
-    outline: none;
+  background: none;
+  border: none;
+  outline: none;
 }
 
 .disable {
-    pointer-events: none;
-    opacity: 0.7;
+  pointer-events: none;
+  opacity: 0.7;
 }
 
 .menu {
-    position: absolute;
-    z-index: 100;
-    top: 110%;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
+  position: absolute;
+  z-index: 100;
+  top: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
 
-    background: #f9f9f9;
+  background: #f9f9f9;
 }
 
 .item {
-    cursor: pointer;
+  cursor: pointer;
 
-    width: 100%;
-    padding: 5px 16px;
+  width: 100%;
+  padding: 5px 16px;
 
-    color: #213547;
+  color: #213547;
 
-    background: none;
-    border: none;
-    outline: none;
-
-
+  background: none;
+  border: none;
+  outline: none;
 }
 
 .item:first-child {
-    padding-top: 7px;
+  padding-top: 7px;
 }
 
 .item:last-child {
-    padding-bottom: 7px;
+  padding-bottom: 7px;
 }
 
 .stack {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
 }
