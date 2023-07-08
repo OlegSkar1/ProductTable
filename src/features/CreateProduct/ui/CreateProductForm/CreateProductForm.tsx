@@ -1,21 +1,25 @@
 import { dateHelper } from '@/shared/lib/dateHelper/dateHelper';
 import cls from './CreateProductForm.module.css';
 import { StockList } from '@/entities/Stock';
-import { MouseEvent } from 'react';
+import { MouseEvent, useEffect } from 'react';
 import { useProductForm } from '../../lib/hooks/useProductForm';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { Input } from '@/shared/ui/Input';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
-import { addProduct } from '../..';
 import { productActions } from '../../model/slice/productSlice';
 import { errorsMap } from '../../model/types/productSchema';
+import { updateProduct } from '../../model/services/updateProduct/updateProduct';
+import { getProductById } from '../../model/services/getProductById/getProductById';
+import { addProduct } from '../../model/services/addProduct/addProduct';
 
 interface Props {
   onSuccess: () => void;
   className?: string;
+  id?: string;
+  isOpen?: boolean;
 }
 
-const CreateProductForm = ({ onSuccess, className }: Props) => {
+const CreateProductForm = ({ onSuccess, className, id, isOpen }: Props) => {
   const {
     product,
     validateErrors,
@@ -28,13 +32,26 @@ const CreateProductForm = ({ onSuccess, className }: Props) => {
 
   const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    if (isOpen) {
+      dispatch(getProductById(id));
+    }
+  }, [dispatch, id, isOpen]);
+
   const { currDate } = dateHelper(product?.date);
 
   const submitHandler = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const id = Date.now().toString().slice(3);
-    dispatch(productActions.createProduct({ id }));
-    const result = await dispatch(addProduct());
+
+    let result;
+
+    if (id) {
+      result = await dispatch(updateProduct());
+    } else {
+      const uid = Date.now().toString().slice(3);
+      dispatch(productActions.createProduct({ id: uid }));
+      result = await dispatch(addProduct());
+    }
 
     if (result.meta.requestStatus === 'fulfilled') onSuccess();
   };

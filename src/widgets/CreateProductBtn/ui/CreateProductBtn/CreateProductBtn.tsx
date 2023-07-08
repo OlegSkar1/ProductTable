@@ -1,7 +1,6 @@
 import { Create } from '@emotion-icons/ionicons-solid';
 import { CreateProductModal } from '@/features/CreateProduct';
 import { useState } from 'react';
-
 interface Props {
   className?: string;
 }

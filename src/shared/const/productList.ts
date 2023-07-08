@@ -3,7 +3,7 @@ import { ProductListType } from '@/entities/Product';
 export const productList: ProductListType = [
   {
     id: '1',
-    date: '06.07.2023',
+    date: '2023-07-06',
     name: 'product1',
     price: 100,
     quantity: 10,
@@ -11,7 +11,7 @@ export const productList: ProductListType = [
   },
   {
     id: '2',
-    date: '06.07.2023',
+    date: '2023-07-06',
     name: 'product1',
     price: 100,
     quantity: 10,
@@ -19,7 +19,7 @@ export const productList: ProductListType = [
   },
   {
     id: '3',
-    date: '06.07.2023',
+    date: '2023-07-06',
     name: 'product1',
     price: 100,
     quantity: 10,

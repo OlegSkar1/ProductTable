@@ -14,27 +14,13 @@ export const dateHelper = (date?: string) => {
 
   const currDate = `${year}-${month}-${day}`;
 
-  let normalizedDate = date;
-
-  let isFuture;
-
-  if (date && date.includes('-')) {
-    const dateArr = date?.split('-');
-    const temp = dateArr[0];
-    dateArr[0] = dateArr[2];
-    dateArr[2] = temp;
-
-    normalizedDate = dateArr?.join('.');
-
-    isFuture = Date.parse(date) > Date.parse(currDate);
-  }
+  const isFuture = date && Date.parse(date) > Date.parse(currDate);
 
   return {
     year,
     month,
     day,
     currDate,
-    normalizedDate,
     isFuture,
   };
 };

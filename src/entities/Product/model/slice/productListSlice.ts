@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { ProductListSchema, ProductListType } from '../..';
+import { IProduct, ProductListSchema, ProductListType } from '../..';
 import { productList } from '@/shared/const/productList';
 import { PRODUCTS_KEY } from '@/shared/const/localStorage';
 
@@ -15,12 +15,20 @@ const productListSlice = createSlice({
       state.data = payload;
       localStorage.setItem(PRODUCTS_KEY, JSON.stringify(state.data));
     },
+    updateProductListById: (state, { payload }: PayloadAction<IProduct>) => {
+      const updatedList = state.data.map((product) => {
+        if (product.id === payload.id) {
+          product = payload;
+        }
+        return product;
+      });
+
+      state.data = updatedList;
+      localStorage.setItem(PRODUCTS_KEY, JSON.stringify(state.data));
+    },
     getProductList: (state) => {
       const productListStore = localStorage.getItem(PRODUCTS_KEY);
-
-      if (!productListStore) {
-        state.data = initialState.data;
-      } else {
+      if (productListStore) {
         state.data = JSON.parse(productListStore) as ProductListType;
       }
     },

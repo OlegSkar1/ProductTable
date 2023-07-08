@@ -9,7 +9,6 @@ import { CreateProductBtn } from '@/widgets/CreateProductBtn';
 export const TablePage = () => {
   const dispatch = useAppDispatch();
   const productList = useSelector(getProductListSelector);
-  console.log(productList);
 
   useEffect(() => {
     dispatch(productlistActions.getProductList());

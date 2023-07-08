@@ -4,12 +4,13 @@ import { AsyncCreateProductForm } from '../CreateProductForm/CreateProductForm.a
 interface Props {
   onClose: () => void;
   isOpen: boolean;
+  id?: string;
 }
 
-export const CreateProductModal = ({ onClose, isOpen }: Props) => {
+export const CreateProductModal = ({ onClose, isOpen, id }: Props) => {
   return (
     <Modal onClose={onClose} isOpen={isOpen}>
-      <AsyncCreateProductForm onSuccess={onClose} />
+      <AsyncCreateProductForm onSuccess={onClose} id={id} isOpen={isOpen} />
     </Modal>
   );
 };

@@ -2,6 +2,8 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { ProductSchema } from '../types/productSchema';
 import { IProduct } from '@/entities/Product';
 import { addProduct } from '../..';
+import { updateProduct } from '../services/updateProduct/updateProduct';
+import { getProductById } from '../services/getProductById/getProductById';
 
 const initialState: ProductSchema = {
   data: undefined,
@@ -28,6 +30,22 @@ const productSlice = createSlice({
       })
       .addCase(addProduct.rejected, (state, { payload }) => {
         state.validateErrors = payload;
+      })
+      .addCase(updateProduct.pending, (state) => {
+        state.validateErrors = undefined;
+      })
+      .addCase(updateProduct.fulfilled, (state) => {
+        state.data = {};
+      })
+      .addCase(updateProduct.rejected, (state, { payload }) => {
+        state.validateErrors = payload;
+      })
+      .addCase(getProductById.pending, (state) => {
+        state.validateErrors = undefined;
+        state.data = {};
+      })
+      .addCase(getProductById.fulfilled, (state, { payload }) => {
+        state.data = payload;
       });
   },
 });

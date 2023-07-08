@@ -5,11 +5,13 @@ import { StockType } from '@/entities/Stock';
 import { useSelector } from 'react-redux';
 import { getProductData } from '../..';
 import { getValidateErrors } from '../../model/selectors/productSelectors/productSelectors';
+import { validateProductErrors } from '../../model/services/validateProductErrors/validateProductErrors';
 
 export const useProductForm = () => {
   const dispatch = useAppDispatch();
   const product = useSelector(getProductData);
   const validateErrors = useSelector(getValidateErrors);
+  const errors = validateProductErrors(product);
 
   const onChangeName = useCallback(
     (value?: string) => {
@@ -44,6 +46,7 @@ export const useProductForm = () => {
 
   return {
     product,
+    errors,
     validateErrors,
     onChangeName,
     onChangeQnt,
